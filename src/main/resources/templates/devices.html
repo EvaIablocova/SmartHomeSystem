@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Devices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Manage Devices</h1>
+    <p th:text="${message}"></p>
+    <h3>Devices</h3>
+    <div th:each="device : ${devices}">
+        <form th:action="@{/control-device}" method="post">
+            <input type="hidden" name="deviceName" th:value="${device}"/>
+            <div class="mb-3">
+                <label th:text="${device} + ':'"></label>
+                <button type="submit" name="action" value="turnOn" class="btn btn-success">Turn On</button>
+                <button type="submit" name="action" value="turnOff" class="btn btn-danger">Turn Off</button>
+                <input type="number" name="value" placeholder="Set Value (e.g., brightness)" class="form-control d-inline w-25"/>
+                <button type="submit" name="action" value="setValue" class="btn btn-info">Set Value</button>
+            </div>
+        </form>
+    </div>
+    <a href="/" class="btn btn-secondary">Back to Home</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

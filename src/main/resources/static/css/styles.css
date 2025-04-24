@@ -1,0 +1,7 @@
+/* src/main/resources/static/css/styles.css */
+body {
+    padding-top: 20px;
+}
+.container {
+    max-width: 800px;
+}

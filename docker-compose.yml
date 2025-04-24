@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: app
+    restart: always
+    ports:
+      - "9070:9070"  # Порт приложения
+      - "5005:5005"  # Порт для отладки
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3356/smartHomeSystem?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: cisco1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    ports:
+      - "3356:3356"
+    environment:
+      MYSQL_DATABASE: smartHomeSystem
+      MYSQL_ROOT_PASSWORD: cisco1234
+    command: --port=3356  # Указываем MySQL слушать 3356 внутри контейнера
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
