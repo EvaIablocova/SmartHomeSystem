@@ -1,4 +1,7 @@
 package org.example.smarthomesystem.state;
 
-public class HomeState {
+import org.example.smarthomesystem.devices.Device;
+
+public interface HomeState {
+    void apply(Device light, Device thermostat);
 }

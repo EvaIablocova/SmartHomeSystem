@@ -1,4 +1,7 @@
 package org.example.smarthomesystem.strategy;
 
-public class EnergyModeStrategy {
+import org.example.smarthomesystem.devices.Device;
+
+public interface EnergyModeStrategy {
+    void applyMode(Device device);
 }

@@ -1,4 +1,5 @@
 package org.example.smarthomesystem.observer;
 
-public class DeviceObserver {
+public interface DeviceObserver {
+    void update(String event);
 }

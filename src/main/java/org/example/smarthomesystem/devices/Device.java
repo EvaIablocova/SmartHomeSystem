@@ -1,4 +1,7 @@
 package org.example.smarthomesystem.devices;
 
-public class Device {
+public interface Device {
+    void turnOn();
+    void turnOff();
+    void setValue(int value);
 }

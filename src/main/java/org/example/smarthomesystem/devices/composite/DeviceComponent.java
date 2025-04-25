@@ -1,4 +1,6 @@
 package org.example.smarthomesystem.devices.composite;
 
-public class DeviceComponent {
+public interface DeviceComponent {
+    void turnOn();
+    void turnOff();
 }
