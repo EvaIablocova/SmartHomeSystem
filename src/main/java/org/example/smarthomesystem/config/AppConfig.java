@@ -26,23 +26,17 @@ public class AppConfig {
         return new LoggingDeviceDecorator(new DeviceProxy(new Light(), "admin"));
     }
 
-    @Bean
-    public Device thermostat() {
-        return new LoggingDeviceDecorator(new DeviceProxy(new ThermostatAdapter(new ThirdPartyThermostat()), "admin"));
-    }
+//    @Bean
+//    public Device thermostat() {
+//        return new LoggingDeviceDecorator(new DeviceProxy(new ThermostatAdapter(new ThirdPartyThermostat()), "admin"));
+//    }
 
-    @Bean
-    public Device securitySystem(SimpMessagingTemplate messagingTemplate) {
-        SecuritySystem securitySystem = new SecuritySystem();
-        securitySystem.addObserver(new SecurityAlertObserver(messagingTemplate));
-        return new LoggingDeviceDecorator(new DeviceProxy(securitySystem, "admin"));
-    }
-
-    @Bean
-    public SmartHomeFacade facade(Device light, Device thermostat, Device securitySystem,
-                                  SmartHomeMediator mediator, DeviceStateRepository repository) {
-        return new SmartHomeFacade(light, thermostat, securitySystem, mediator, repository);
-    }
+//    @Bean
+//    public Device securitySystem(SimpMessagingTemplate messagingTemplate) {
+//        SecuritySystem securitySystem = new SecuritySystem();
+//        securitySystem.addObserver(new SecurityAlertObserver(messagingTemplate));
+//        return new LoggingDeviceDecorator(new DeviceProxy(securitySystem, "admin"));
+//    }
 
     @Bean
     public SmartHomeMediator mediator(Device light, Device thermostat, Device securitySystem) {
@@ -52,4 +46,10 @@ public class AppConfig {
         mediator.registerDevice(securitySystem);
         return mediator;
     }
+
+//    @Bean
+//    public SmartHomeFacade facade(Device light, Device thermostat, Device securitySystem,
+//                                  SmartHomeMediator mediator, DeviceStateRepository repository) {
+//        return new SmartHomeFacade(light, thermostat, securitySystem, mediator, repository);
+//    }
 }
