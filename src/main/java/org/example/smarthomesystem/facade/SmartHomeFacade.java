@@ -1,5 +1,6 @@
 package org.example.smarthomesystem.facade;
 
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.example.smarthomesystem.devices.Device;
 import org.example.smarthomesystem.entity.DeviceState;
@@ -7,8 +8,8 @@ import org.example.smarthomesystem.mediator.SmartHomeMediator;
 import org.example.smarthomesystem.repository.DeviceStateRepository;
 import org.springframework.stereotype.Component;
 
-@Component
 @Getter
+@Component
 public class SmartHomeFacade {
     private final Device light;
     private final Device thermostat;
@@ -23,6 +24,20 @@ public class SmartHomeFacade {
         this.securitySystem = securitySystem;
         this.mediator = mediator;
         this.repository = repository;
+    }
+
+    @PostConstruct
+    public void init() {
+        // Инициализация устройств в базе данных, если их там нет
+        if (!repository.existsById("Light")) {
+            saveState("Light", false, 0);
+        }
+        if (!repository.existsById("Thermostat")) {
+            saveState("Thermostat", false, 20);
+        }
+        if (!repository.existsById("SecuritySystem")) {
+            saveState("SecuritySystem", false, 0);
+        }
     }
 
     public void eveningMode() {

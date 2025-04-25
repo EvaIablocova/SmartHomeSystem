@@ -11,17 +11,18 @@ import java.util.List;
 @Table(name = "device_state")
 public class DeviceState {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String deviceName;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
+
     private boolean isOn;
     private int value;
 
     public DeviceState() {}
 
-    public DeviceState(String deviceName, boolean isOn, int value) {
-        this.deviceName = deviceName;
+//    public DeviceState(String deviceName, boolean isOn, int value) {
+    public DeviceState(boolean isOn, int value) {
         this.isOn = isOn;
         this.value = value;
     }

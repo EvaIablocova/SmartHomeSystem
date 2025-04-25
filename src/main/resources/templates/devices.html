@@ -9,19 +9,25 @@
 <body>
 <div class="container">
     <h1>Manage Devices</h1>
-    <p th:text="${message}"></p>
+    <p th:text="${message}" class="alert alert-info" th:if="${message != null}"></p>
     <h3>Devices</h3>
-    <div th:each="device : ${devices}">
-        <form th:action="@{/control-device}" method="post">
-            <input type="hidden" name="deviceName" th:value="${device}"/>
-            <div class="mb-3">
-                <label th:text="${device} + ':'"></label>
-                <button type="submit" name="action" value="turnOn" class="btn btn-success">Turn On</button>
-                <button type="submit" name="action" value="turnOff" class="btn btn-danger">Turn Off</button>
-                <input type="number" name="value" placeholder="Set Value (e.g., brightness)" class="form-control d-inline w-25"/>
-                <button type="submit" name="action" value="setValue" class="btn btn-info">Set Value</button>
-            </div>
-        </form>
+    <div th:each="state : ${deviceStates}" class="mb-3">
+        <div class="d-flex align-items-center">
+            <!-- Форма для управления устройством -->
+            <form th:action="@{/control-device}" method="post" class="d-inline-flex align-items-center">
+                <input type="hidden" name="deviceName" th:value="${state.deviceName}"/>
+                <label th:text="${state.deviceName} + ': ' + ${state.isOn ? 'On' : 'Off'} + ', Value: ' + ${state.value}" class="me-3"></label>
+                <button type="submit" name="action" value="turnOn" class="btn btn-success me-2">Turn On</button>
+                <button type="submit" name="action" value="turnOff" class="btn btn-danger me-2">Turn Off</button>
+                <input type="number" name="value" th:placeholder="${state.deviceName == 'Light' ? 'Set Brightness (0-100)' : 'Set Temperature (10-30)'}" class="form-control d-inline w-auto me-2"/>
+                <button type="submit" name="action" value="setValue" class="btn btn-info me-2">Set Value</button>
+            </form>
+            <!-- Форма для удаления устройства -->
+            <form th:action="@{/delete-device}" method="post" class="d-inline">
+                <input type="hidden" name="deviceName" th:value="${state.deviceName}"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
     </div>
     <a href="/" class="btn btn-secondary">Back to Home</a>
 </div>

@@ -1,5 +1,8 @@
 package org.example.smarthomesystem.devices;
 
+import lombok.Getter;
+
+@Getter
 public class Light implements Device {
     private boolean isOn = false;
     private int brightness = 0;
